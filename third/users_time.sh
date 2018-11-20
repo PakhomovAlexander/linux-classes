@@ -1,7 +1,7 @@
 #!/bin/bash
 
 last | 
-	sed -r 's/.*running.*|.*logged in.*//g' | # !!! 
+	sed -r 's/.*running.*|.*logged in.*//g' | # cut first and last col
 	sed -r 's/\s([a-zA-Z0-9.:-])*//g' | 
 	sed 's/(/ /g' | 
 	sed 's/)//g' | 
@@ -11,11 +11,13 @@ last |
 
 mkdir -p /tmp/task3
 
+#map
 while read line; do 
 	arr=(${line// / })
         echo "${arr[1]}" >> /tmp/task3/${arr[0]}
 done </tmp/file.txt
 
+#reduce
 for file in /tmp/task3/*; do
         d=0
 	h=0
